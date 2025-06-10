@@ -1,4 +1,4 @@
-# apkReforge
+# apkReforge v1.1.2
 
 **apkReforge** is an automated tool for rebuilding, aligning, signing, and optionally installing Android APKs. It enhances the standard workflow by validating dependencies, handling keystore generation, and producing clean debug outputs.
 
